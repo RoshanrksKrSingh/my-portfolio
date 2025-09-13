@@ -28,6 +28,16 @@ export default function Navbar() {
 
   const toggleDrawer = (state) => () => setOpen(state);
 
+  // Handle link click: navigate + close drawer
+  const handleLinkClick = (section) => (e) => {
+    e.preventDefault();
+    const target = document.querySelector(`#${section.toLowerCase()}`);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+    setOpen(false);
+  };
+
   return (
     <>
       <AppBar
@@ -105,7 +115,9 @@ export default function Navbar() {
             {/* Center: Dark/Light Toggle */}
             {!isMobile && (
               <Box sx={{ textAlign: "center" }}>
-                <Typography variant="body2" sx={{ color: isDark ? "#fff" : "#000",ml:7 }}
+                <Typography
+                  variant="body2"
+                  sx={{ color: isDark ? "#fff" : "#000", ml: 7 }}
                 >
                   🌙 / ☀️
                 </Typography>
@@ -165,7 +177,10 @@ export default function Navbar() {
               p: 2,
             }}
           >
-            <IconButton onClick={toggleDrawer(false)} sx={{ color: isDark ? "#fff" : "#000" }}>
+            <IconButton
+              onClick={toggleDrawer(false)}
+              sx={{ color: isDark ? "#fff" : "#000" }}
+            >
               <CloseIcon />
             </IconButton>
           </Box>
@@ -177,6 +192,7 @@ export default function Navbar() {
                 <ListItemButton
                   component="a"
                   href={`#${section.toLowerCase()}`}
+                  onClick={handleLinkClick(section)}
                   sx={{ color: isDark ? "#fff" : "#000" }}
                 >
                   <ListItemText primary={section} />
