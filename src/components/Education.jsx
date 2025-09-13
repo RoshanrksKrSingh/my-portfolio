@@ -24,7 +24,7 @@ const educationData = [
   {
     icon: <SchoolIcon fontSize="large" />,
     degree: "Bachelor of Science (B.Sc)",
-    field: "Computer Science & Engineering",
+    field: "Physics & Chemistary",
     institution: "GPSPG Khalilabad, Santkabir Nagar",
     duration: "2013 - 2016",
   },
