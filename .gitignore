@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+<<<<<<< HEAD
 # Dependency directories
 node_modules/
 
@@ -34,11 +35,26 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 .idea/
+=======
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+>>>>>>> 54c31f4 (1st)
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+<<<<<<< HEAD
 
 # Optional: log files from tooling
 *.tsbuildinfo
+=======
+>>>>>>> 54c31f4 (1st)
