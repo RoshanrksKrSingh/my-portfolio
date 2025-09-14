@@ -10,6 +10,7 @@ import Education from "./components/Education";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Experience from "./components/Experience";
+import Team from "./components/Team"
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
@@ -73,6 +74,7 @@ function App() {
         <Skills />
         <Projects />
         <Experience />
+        <Team/>
         <Education />
         <Contact />
         <Footer />

@@ -17,7 +17,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
-const leftSections = ["About", "Experience"];
+// 🔧 Updated here: Added "Team" after "Experience"
+const leftSections = ["About", "Experience", "Team"];
 const rightSections = ["Skills", "Projects", "Education", "Contact"];
 
 export default function Navbar() {
@@ -28,7 +29,6 @@ export default function Navbar() {
 
   const toggleDrawer = (state) => () => setOpen(state);
 
-  // Handle link click: navigate + close drawer
   const handleLinkClick = (section) => (e) => {
     e.preventDefault();
     const target = document.querySelector(`#${section.toLowerCase()}`);
@@ -67,7 +67,7 @@ export default function Navbar() {
               minWidth: 0,
             }}
           >
-            {/* Left side: Logo + About + Experience */}
+            {/* Left side: Logo + About + Experience + Team */}
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
               <Typography
                 variant="h5"
@@ -112,7 +112,7 @@ export default function Navbar() {
               )}
             </Box>
 
-            {/* Center: Dark/Light Toggle */}
+            {/* Center: Dark/Light Toggle Placeholder */}
             {!isMobile && (
               <Box sx={{ textAlign: "center" }}>
                 <Typography
@@ -124,7 +124,7 @@ export default function Navbar() {
               </Box>
             )}
 
-            {/* Right side: Rest sections */}
+            {/* Right side: Skills + Projects + Education + Contact */}
             {!isMobile && (
               <Box sx={{ display: "flex", gap: 1.5 }}>
                 {rightSections.map((section) => (
@@ -144,7 +144,7 @@ export default function Navbar() {
               </Box>
             )}
 
-            {/* Mobile menu button */}
+            {/* Mobile Menu Button */}
             {isMobile && (
               <IconButton
                 edge="end"
@@ -158,7 +158,7 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
 
-      {/* Mobile Drawer */}
+      {/* Drawer for Mobile */}
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
         <Box
           sx={{
@@ -169,7 +169,7 @@ export default function Navbar() {
           }}
           role="presentation"
         >
-          {/* Drawer Header with Close Icon */}
+          {/* Close Icon */}
           <Box
             sx={{
               display: "flex",
@@ -185,7 +185,7 @@ export default function Navbar() {
             </IconButton>
           </Box>
 
-          {/* Drawer Links */}
+          {/* Drawer Links: Left + Right Sections Combined */}
           <List>
             {[...leftSections, ...rightSections].map((section) => (
               <ListItem key={section} disablePadding>
