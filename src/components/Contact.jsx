@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Box,
   Container,
@@ -8,6 +9,8 @@ import {
   Paper,
   Stack,
   useTheme,
+  CircularProgress,
+  Alert,
 } from "@mui/material";
 
 const Contact = () => {
@@ -20,6 +23,10 @@ const Contact = () => {
     message: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -28,12 +35,37 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message!");
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setSuccessMessage("");
+  setErrorMessage("");
+
+  try {
+    const response = await axios.post(
+      "https://my-contact-api.onrender.com/api/contact", // ← updated here
+      formData,
+      {
+        withCredentials: true, // keep if the backend needs cookies
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    setSuccessMessage("✅ Thank you for your message!");
     setFormData({ name: "", email: "", message: "" });
-  };
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    setErrorMessage(
+      error.response?.data?.error ||
+        "❌ Oops! There was a problem sending your message."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <Box
@@ -41,8 +73,8 @@ const Contact = () => {
       sx={{
         py: 10,
         background: isDark
-          ? "#000" // black in dark mode
-          : "linear-gradient(90deg, #3ae8cb 0%, #efd9d9 100%)", // unchanged in light mode
+          ? "#000"
+          : "linear-gradient(90deg, #3ae8cb 0%, #efd9d9 100%)",
         textAlign: "center",
       }}
     >
@@ -68,9 +100,7 @@ const Contact = () => {
           elevation={6}
           sx={{
             p: 4,
-            backgroundColor: isDark
-              ? "#fff" // white form in dark mode
-              : "rgba(255,255,255,0.15)", // original in light mode
+            backgroundColor: isDark ? "#fff" : "rgba(255,255,255,0.15)",
             backdropFilter: isDark ? "none" : "blur(5px)",
             borderRadius: 3,
           }}
@@ -97,21 +127,21 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   InputProps={{
-                    style: { color: "#000" }, // black text inside white form
+                    style: { color: "#000" },
                   }}
                   InputLabelProps={{
-                    style: { color: "#555" }, // gray label
+                    style: { color: "#555" },
                   }}
                   sx={{
                     "& .MuiOutlinedInput-root": {
                       "& fieldset": {
-                        borderColor: isDark ? "#888" : undefined, // darker border in dark mode
+                        borderColor: isDark ? "#888" : undefined,
                       },
                       "&:hover fieldset": {
-                        borderColor: isDark ? "#00ccaa" : undefined, // highlight on hover
+                        borderColor: isDark ? "#00ccaa" : undefined,
                       },
                       "&.Mui-focused fieldset": {
-                        borderColor: isDark ? "#00ffd5" : undefined, // neon border on focus
+                        borderColor: isDark ? "#00ffd5" : undefined,
                       },
                     },
                   }}
@@ -121,15 +151,25 @@ const Contact = () => {
               <Button
                 type="submit"
                 variant="contained"
+                disabled={loading}
                 sx={{
                   backgroundColor: "#00ffd5",
                   color: "#000",
                   fontWeight: "bold",
                   "&:hover": { backgroundColor: "#00ccaa" },
+                  height: 48,
                 }}
               >
-                Send Message
+                {loading ? (
+                  <CircularProgress size={24} sx={{ color: "#000" }} />
+                ) : (
+                  "Send Message"
+                )}
               </Button>
+
+              {/* Message feedback */}
+              {successMessage && <Alert severity="success">{successMessage}</Alert>}
+              {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
             </Stack>
           </form>
         </Paper>
