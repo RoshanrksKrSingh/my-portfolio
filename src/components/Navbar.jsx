@@ -17,7 +17,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
-// 🔧 Updated here: Added "Team" after "Experience"
+
 const leftSections = ["About", "Experience", "Team"];
 const rightSections = ["Skills", "Projects", "Education", "Contact"];
 
@@ -117,7 +117,7 @@ export default function Navbar() {
               <Box sx={{ textAlign: "center" }}>
                 <Typography
                   variant="body2"
-                  sx={{ color: isDark ? "#fff" : "#000", ml: 7 }}
+                  sx={{ color: isDark ? "#fff" : "#000", ml: 2, }}
                 >
                   🌙 / ☀️
                 </Typography>

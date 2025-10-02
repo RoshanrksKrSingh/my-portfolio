@@ -1,4 +1,3 @@
-// AppTheme.jsx
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { getTheme } from './theme/theme';
