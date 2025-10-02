@@ -41,6 +41,8 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+     console.log("Form submit initiated");
+  console.log("Form Data:", formData);
     setLoading(true);
     setSuccessMessage("");
     setErrorMessage("");
