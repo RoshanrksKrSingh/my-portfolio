@@ -80,7 +80,7 @@ export default function Navbar() {
                   textTransform: "uppercase",
                   cursor: "pointer",
                   fontFamily: "'Poppins', sans-serif",
-                  fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+                  fontSize: { xs: "1rem", sm: "1.25rem", md: "1.25rem" },
                   background: isDark
                     ? "linear-gradient(90deg, #00ffd5, #00ccaa)"
                     : "linear-gradient(90deg, #01594a, #070101)",
